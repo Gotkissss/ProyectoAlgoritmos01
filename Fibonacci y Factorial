@@ -9,5 +9,5 @@
       (* n (factorial (- n 1)))))
 
 // Ejemplo de uso:
-(format t "Fibonacci de 25:" (fibonacci 5))
-(format t "Factorial de 10: " (factorial 5))
+"Fibonacci de 25:" (fibonacci 5))
+"Factorial de 10: " (factorial 5))
