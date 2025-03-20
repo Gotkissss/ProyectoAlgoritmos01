@@ -11,9 +11,11 @@ public class Lexer {
     }
 
     public List<String> tokenize() {
+        // Detectar paréntesis y operadores
         Pattern pattern = Pattern.compile("\\(|\\)|[\\w+\\-*/]+");
         Matcher matcher = pattern.matcher(input);
 
+        // Extrae los tokens
         while (matcher.find()) {
             tokens.add(matcher.group());
         }

@@ -8,6 +8,7 @@ public class Environment {
     }
 
     public Object get(String name) {
+        // Si la variable no existe, tira error
         if (!variables.containsKey(name)) {
             throw new RuntimeException("Variable no definida: " + name);
         }
@@ -15,6 +16,7 @@ public class Environment {
     }
 
     public void set(String name, Object value) {
+        // Guarda la variable
         variables.put(name, value);
     }
 }

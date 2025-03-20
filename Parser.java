@@ -15,6 +15,7 @@ public class Parser {
         String token = iterator.next();
 
         if (token.equals("(")) {
+            // Crea un nodo para la expresión
             ASTNode node = new ASTNode("expression", "");
             while (iterator.hasNext()) {
                 String nextToken = iterator.next();
@@ -27,6 +28,7 @@ public class Parser {
         } else if (token.equals(")")) {
             throw new RuntimeException("Paréntesis de cierre inesperado.");
         } else {
+            // Crea un nodo para un número o variable
             return new ASTNode("atom", token);
         }
     }

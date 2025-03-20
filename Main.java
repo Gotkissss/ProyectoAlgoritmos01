@@ -12,7 +12,7 @@ public class Main {
         List<String> tokens = lexer.tokenize();
         System.out.println("Tokens: " + tokens);
 
-        // Parseo (asumiendo un ASTNode como resultado del parser)
+        // Parseo)
         Parser parser = new Parser();
         ASTNode ast = parser.parse(tokens);
         System.out.println("AST generado: " + ast);
