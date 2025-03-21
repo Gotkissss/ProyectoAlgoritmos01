@@ -1,15 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 class EvaluatorTest {
     @Test
     void testEvaluateSimpleExpression() {
         Lexer lexer = new Lexer("(+ 1 2)");
         List<String> tokens = lexer.tokenize();
-        LispParser parser = new LispParser(tokens);
-        ASTNode ast = parser.parse();
+        Parser parser = new Parser();
+        ASTNode ast = parser.parse(tokens);
         Evaluator evaluator = new Evaluator();
-        Object result = evaluator.evaluate(ast);
+        int result = (int) evaluator.evaluate(ast);
         assertEquals(3, result);
     }
 
@@ -17,10 +18,10 @@ class EvaluatorTest {
     void testEvaluateNestedExpression() {
         Lexer lexer = new Lexer("(+ (* 2 3) 4)");
         List<String> tokens = lexer.tokenize();
-        LispParser parser = new LispParser(tokens);
-        ASTNode ast = parser.parse();
+        Parser parser = new Parser();
+        ASTNode ast = parser.parse(tokens);
         Evaluator evaluator = new Evaluator();
-        Object result = evaluator.evaluate(ast);
+        int result = (int) evaluator.evaluate(ast);
         assertEquals(10, result);
     }
 
@@ -28,9 +29,10 @@ class EvaluatorTest {
     void testEvaluateDivisionByZero() {
         Lexer lexer = new Lexer("(/ 1 0)");
         List<String> tokens = lexer.tokenize();
-        LispParser parser = new LispParser(tokens);
-        ASTNode ast = parser.parse();
+        Parser parser = new Parser();
+        ASTNode ast = parser.parse(tokens);
         Evaluator evaluator = new Evaluator();
         assertThrows(ArithmeticException.class, () -> evaluator.evaluate(ast));
     }
+
 }
