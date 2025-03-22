@@ -1,17 +1,17 @@
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
 
-class LexerTest {
+public class LexerTest {
     @Test
-    void testTokenizeSimpleExpression() {
-        Lexer lexer = new Lexer("(+ 1 2)");
+    public void testTokenize() {
+        Lexer lexer = new Lexer("(+ 2 3)");
         List<String> tokens = lexer.tokenize();
-        assertEquals(List.of("(", "+", "1", "2", ")"), tokens);
+        assertEquals(List.of("(", "+", "2", "3", ")"), tokens);
     }
 
     @Test
-    void testTokenizeNestedExpression() {
+    public void testTokenizeWithNestedExpression() {
         Lexer lexer = new Lexer("(+ (* 2 3) 4)");
         List<String> tokens = lexer.tokenize();
         assertEquals(List.of("(", "+", "(", "*", "2", "3", ")", "4", ")"), tokens);

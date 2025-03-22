@@ -3,23 +3,36 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese una expresión Lisp:");
-        String input = scanner.nextLine();
+        Evaluator evaluator = new Evaluator();  // Mantiene el entorno entre ejecuciones
+        
+        System.out.println("Intérprete Lisp en Java. Escribe 'exit' para salir.");
+        
+        while (true) {
+            System.out.print("> ");
+            String input = scanner.nextLine();
+            
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            try {
+                // Tokenización
+                Lexer lexer = new Lexer(input);
+                List<String> tokens = lexer.tokenize();
+
+                // Parseo
+                Parser parser = new Parser();
+                ASTNode ast = parser.parse(tokens);
+
+                // Evaluación
+                Object result = evaluator.evaluate(ast);
+                System.out.println("Resultado: " + result);
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+
         scanner.close();
-
-        // Tokenización
-        Lexer lexer = new Lexer(input);
-        List<String> tokens = lexer.tokenize();
-        System.out.println("Tokens: " + tokens);
-
-        // Parseo)
-        Parser parser = new Parser();
-        ASTNode ast = parser.parse(tokens);
-        System.out.println("AST generado: " + ast);
-
-        // Evaluación
-        Evaluator evaluator = new Evaluator();
-        Object result = evaluator.evaluate(ast);
-        System.out.println("Resultado: " + result);
+        System.out.println("Programa terminado.");
     }
 }
